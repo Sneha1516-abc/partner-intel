@@ -13,6 +13,7 @@ export default function Home() {
   const [result, setResult] = useState<any>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleResearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ export default function Home() {
     setLoading(true);
     setResult(null);
     setSaved(false);
+    setErrorMsg('');
 
     try {
       const res = await fetch('/api/research', {
@@ -31,9 +33,12 @@ export default function Home() {
       const data = await res.json();
       if (data.success) {
         setResult(data.data);
+      } else {
+        setErrorMsg(data.error || 'Failed to generate research. Please try again.');
       }
     } catch (error) {
       console.error('Research failed', error);
+      setErrorMsg('A network error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -170,6 +175,13 @@ export default function Home() {
                 )}
               </button>
             </div>
+
+            {errorMsg && (
+              <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium flex items-start gap-2">
+                <div className="w-5 h-5 shrink-0 mt-0.5">⚠️</div>
+                <p>{errorMsg}</p>
+              </div>
+            )}
           </form>
         </div>
       </motion.div>
