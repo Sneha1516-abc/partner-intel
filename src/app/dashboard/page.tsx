@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Calendar, Link as LinkIcon, ArrowRight, X, Sparkles } from 'lucide-react';
+import { Building2, Calendar, Link as LinkIcon, ArrowRight, X, Sparkles, Trash2, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 type Partner = {
@@ -22,6 +22,27 @@ export default function DashboardPage() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this partner profile?')) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/partners?id=${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setPartners(prev => prev.filter(p => p.id !== id));
+        setSelectedPartner(null);
+      } else {
+        alert(data.error || 'Failed to delete partner.');
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
+      alert('A network error occurred while deleting.');
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   useEffect(() => {
     async function fetchPartners() {
@@ -152,8 +173,17 @@ export default function DashboardPage() {
               <button
                 onClick={() => setSelectedPartner(null)}
                 className="absolute top-6 right-6 p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 transition-colors"
+                title="Close"
               >
                 <X className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => handleDelete(selectedPartner.id)}
+                disabled={deleting}
+                className="absolute top-6 right-16 p-2 rounded-full bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Delete Partner"
+              >
+                {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
               </button>
 
               <div className="flex flex-col md:flex-row items-start md:items-center gap-5 mb-8 pb-8 border-b border-black/10">

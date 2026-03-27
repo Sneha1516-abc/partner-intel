@@ -59,8 +59,26 @@ export async function POST(request: Request) {
         `;
 
         return NextResponse.json({ success: true, id: result.rows[0].id });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error saving partner (Vercel Postgres):', error);
         return NextResponse.json({ success: false, error: 'Database saving error. Make sure Postgres is provisioned in Vercel.' }, { status: 500 });
+    }
+}
+
+export async function DELETE(request: Request) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ success: false, error: 'Missing partner ID' }, { status: 400 });
+        }
+
+        await sql`DELETE FROM partners WHERE id = ${id}`;
+
+        return NextResponse.json({ success: true, id });
+    } catch (error: any) {
+        console.error('Error deleting partner:', error);
+        return NextResponse.json({ success: false, error: 'Database deletion error.' }, { status: 500 });
     }
 }
