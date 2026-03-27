@@ -1,14 +1,29 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/db';
+import { sql } from '@vercel/postgres';
 
 export async function GET() {
     try {
-        const db = getDb();
-        const partners = db.prepare('SELECT * FROM partners ORDER BY createdAt DESC').all();
-        return NextResponse.json({ success: true, partners });
+        // Ensure table exists on first run
+        await sql`
+            CREATE TABLE IF NOT EXISTS partners (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                url TEXT,
+                category VARCHAR(255),
+                "ecosystemContext" TEXT,
+                overview TEXT,
+                strategy TEXT NOT NULL,
+                synergy TEXT,
+                "gtmStrategy" TEXT,
+                "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `;
+
+        const { rows } = await sql`SELECT * FROM partners ORDER BY "createdAt" DESC`;
+        return NextResponse.json({ success: true, partners: rows });
     } catch (error) {
-        console.error('Error fetching partners:', error);
-        return NextResponse.json({ success: false, error: 'Failed to fetch partners' }, { status: 500 });
+        console.error('Error fetching partners (Vercel Postgres):', error);
+        return NextResponse.json({ success: false, error: 'Database error. Make sure Postgres is provisioned in Vercel.' }, { status: 500 });
     }
 }
 
@@ -21,15 +36,31 @@ export async function POST(request: Request) {
             return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
         }
 
-        const db = getDb();
-        const stmt = db.prepare(
-            'INSERT INTO partners (name, url, category, ecosystemContext, overview, strategy, synergy, gtmStrategy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-        );
-        const result = stmt.run(name, url || '', category || '', ecosystemContext || '', overview || '', strategy, synergy || '', gtmStrategy || '');
+        // Just in case GET wasn't called first
+        await sql`
+            CREATE TABLE IF NOT EXISTS partners (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                url TEXT,
+                category VARCHAR(255),
+                "ecosystemContext" TEXT,
+                overview TEXT,
+                strategy TEXT NOT NULL,
+                synergy TEXT,
+                "gtmStrategy" TEXT,
+                "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `;
 
-        return NextResponse.json({ success: true, id: result.lastInsertRowid });
+        const result = await sql`
+            INSERT INTO partners (name, url, category, "ecosystemContext", overview, strategy, synergy, "gtmStrategy")
+            VALUES (${name}, ${url || ''}, ${category || ''}, ${ecosystemContext || ''}, ${overview || ''}, ${strategy}, ${synergy || ''}, ${gtmStrategy || ''})
+            RETURNING id
+        `;
+
+        return NextResponse.json({ success: true, id: result.rows[0].id });
     } catch (error) {
-        console.error('Error saving partner:', error);
-        return NextResponse.json({ success: false, error: 'Failed to save partner' }, { status: 500 });
+        console.error('Error saving partner (Vercel Postgres):', error);
+        return NextResponse.json({ success: false, error: 'Database saving error. Make sure Postgres is provisioned in Vercel.' }, { status: 500 });
     }
 }
