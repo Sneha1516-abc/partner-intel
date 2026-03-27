@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
         {/* Navigation Bar */}
-        <header className="sticky top-0 z-50 glass-panel border-b-0 border-b-white/5 px-6 py-4 flex items-center justify-between">
+        <header className="sticky top-0 z-50 glass-panel border-b-0 border-b-black/5 px-6 py-4 flex items-center justify-between shadow-sm">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(139,92,246,0.5)] group-hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] transition-all">
               PI
@@ -28,10 +28,10 @@ export default function RootLayout({
           </Link>
 
           <nav className="flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+            <Link href="/" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
               Research
             </Link>
-            <Link href="/dashboard" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+            <Link href="/dashboard" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
               Dashboard
             </Link>
           </nav>

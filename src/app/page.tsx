@@ -67,10 +67,10 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center max-w-3xl mb-12"
       >
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-zinc-900">
           Condense by <span className="text-gradient">Zeliot</span>
         </h1>
-        <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-zinc-500 leading-relaxed max-w-2xl mx-auto">
           Instantly research target companies and generate tailored GTM strategies and synergy maps to accelerate your partnerships.
         </p>
       </motion.div>
@@ -91,10 +91,10 @@ export default function Home() {
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-zinc-400 mb-1.5 block">Company Name</label>
+                <label className="text-sm font-semibold text-zinc-700 mb-1.5 block">Company Name</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Building2 className="w-5 h-5 text-zinc-500" />
+                    <Building2 className="w-5 h-5 text-zinc-400" />
                   </div>
                   <input
                     type="text"
@@ -102,49 +102,49 @@ export default function Home() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Palantir"
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-600"
+                    className="w-full bg-white border border-black/10 rounded-xl py-3 pl-11 pr-4 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-zinc-400 mb-1.5 block">Website URL (optional)</label>
+                <label className="text-sm font-semibold text-zinc-700 mb-1.5 block">Website URL (optional)</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <LinkIcon className="w-5 h-5 text-zinc-500" />
+                    <LinkIcon className="w-5 h-5 text-zinc-400" />
                   </div>
                   <input
                     type="url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="e.g. acme.com"
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-600"
+                    className="w-full bg-white border border-black/10 rounded-xl py-3 pl-11 pr-4 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-zinc-400 mb-1.5 block">Category</label>
+                <label className="text-sm font-semibold text-zinc-700 mb-1.5 block">Category</label>
                 <div className="relative">
                   <input
                     type="text"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="e.g. Data Analytics"
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-600"
+                    className="w-full bg-white border border-black/10 rounded-xl py-3 px-4 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-zinc-400 mb-1.5 block">Ecosystem Context (optional)</label>
+                <label className="text-sm font-semibold text-zinc-700 mb-1.5 block">Ecosystem Context (optional)</label>
                 <div className="relative">
                   <input
                     type="text"
                     value={ecosystemContext}
                     onChange={(e) => setEcosystemContext(e.target.value)}
                     placeholder="e.g. Confluent partner via Kafka integration"
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-600"
+                    className="w-full bg-white border border-black/10 rounded-xl py-3 px-4 text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => { setName(''); setUrl(''); setCategory(''); setEcosystemContext(''); setResult(null); }}
-                className="btn-secondary flex-1 py-4 rounded-xl font-bold text-lg transition-all border border-white/10 hover:border-white/30"
+                className="btn-secondary flex-1 py-4 rounded-xl font-bold text-lg transition-all border border-black/10 hover:border-black/30 bg-white hover:bg-zinc-50"
               >
                 Cancel
               </button>
@@ -187,14 +187,14 @@ export default function Home() {
               {/* Background accent */}
               <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-white/10 pb-6 mb-8">
+              <div className="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-black/10 pb-6 mb-8">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/20 mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold border border-blue-100 mb-3">
                     <CheckCircle2 className="w-3.5 h-3.5" /> Intelligence Generated
                   </div>
-                  <h2 className="text-3xl font-bold">{result.name}</h2>
+                  <h2 className="text-3xl font-bold text-zinc-900">{result.name}</h2>
                   {result.url && (
-                    <a href={result.url.startsWith('http') ? result.url : `https://${result.url}`} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors mt-1 flex items-center gap-1.5 text-sm">
+                    <a href={result.url.startsWith('http') ? result.url : `https://${result.url}`} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 transition-colors mt-1 flex items-center gap-1.5 text-sm">
                       <LinkIcon className="w-4 h-4" /> {result.url}
                     </a>
                   )}
@@ -204,9 +204,9 @@ export default function Home() {
                   <button
                     onClick={handleSave}
                     disabled={saving || saved}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${saved
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-white/10 hover:bg-white/15 text-white border border-white/10 hover:border-white/20'
+                    className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-sm ${saved
+                      ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                      : 'bg-white hover:bg-zinc-50 text-zinc-900 border border-black/10 hover:border-black/20'
                       }`}
                   >
                     {saving ? (
@@ -225,11 +225,11 @@ export default function Home() {
                   <h3 className="text-xs font-bold tracking-widest text-zinc-500 uppercase">
                     PARTNERSHIP OVERVIEW
                   </h3>
-                  <ul className="bg-zinc-950/50 rounded-2xl p-6 border border-white/5 space-y-4">
+                  <ul className="bg-white rounded-2xl p-6 border border-black/5 shadow-sm space-y-4">
                     {result.overview.split('\n').filter(Boolean).map((line: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 group">
                         <CheckCircle2 className="w-5 h-5 text-violet-500 shrink-0 mt-0.5" />
-                        <span className="text-zinc-300 leading-relaxed group-hover:text-white transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
+                        <span className="text-zinc-600 leading-relaxed group-hover:text-zinc-900 transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
                       </li>
                     ))}
                   </ul>
@@ -239,11 +239,11 @@ export default function Home() {
                   <h3 className="text-xs font-bold tracking-widest text-[#8b5cf6] uppercase">
                     APPROACH STRATEGY FOR CONDENSE
                   </h3>
-                  <ul className="bg-zinc-950/50 rounded-2xl p-6 border border-white/5 space-y-4">
+                  <ul className="bg-white rounded-2xl p-6 border border-black/5 shadow-sm space-y-4">
                     {result.strategy.split('\n').filter(Boolean).map((line: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 group">
                         <CheckCircle2 className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                        <span className="text-zinc-300 leading-relaxed group-hover:text-white transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
+                        <span className="text-zinc-600 leading-relaxed group-hover:text-zinc-900 transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
                       </li>
                     ))}
                   </ul>
@@ -255,11 +255,11 @@ export default function Home() {
                   <h3 className="text-xs font-bold tracking-widest text-[#10b981] uppercase flex items-center gap-2">
                     <Sparkles className="w-4 h-4" /> GTM STRATEGY
                   </h3>
-                  <ul className="bg-emerald-500/10 rounded-2xl p-6 border border-emerald-500/20 space-y-4">
+                  <ul className="bg-emerald-50/50 rounded-2xl p-6 border border-emerald-100 shadow-sm space-y-4">
                     {result.gtmStrategy.split('\n').filter(Boolean).map((line: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 group">
                         <div className="w-2 h-2 rounded-full bg-[#10b981] shrink-0 mt-2"></div>
-                        <span className="text-zinc-300 leading-relaxed group-hover:text-white transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
+                        <span className="text-zinc-600 leading-relaxed group-hover:text-zinc-900 transition-colors">{line.replace(/^[-*•]\s*/, '')}</span>
                       </li>
                     ))}
                   </ul>

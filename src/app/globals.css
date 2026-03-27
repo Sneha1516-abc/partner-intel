@@ -8,21 +8,21 @@
 }
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  
+  --background: #f8fafc;
+  --foreground: #09090b;
+
   /* Primary brand colors - Sleek modern purple/blue */
   --primary: #8b5cf6;
   --primary-foreground: #ffffff;
   --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-  
+
   /* Surface and borders */
-  --surface: #18181b;
-  --surface-hover: #27272a;
-  --border: #3f3f46;
-  --glass: rgba(24, 24, 27, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+
   /* Accents */
   --accent: #22d3ee;
 }
@@ -85,7 +85,10 @@ body {
 .glow-effect::before {
   content: '';
   position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   background: var(--primary-gradient);
   z-index: -1;
   filter: blur(10px);
