@@ -143,9 +143,22 @@ export default function DashboardPage() {
                       year: 'numeric', month: 'short', day: 'numeric'
                     })}
                   </div>
-                  <span className="text-xs text-violet-500 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    Read Report <ArrowRight className="w-3 h-3" />
-                  </span>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(partner.id);
+                      }}
+                      disabled={deleting}
+                      className="text-red-400 hover:text-red-500 transition-colors disabled:opacity-50 flex items-center justify-center"
+                      title="Delete Partner"
+                    >
+                      {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                    </button>
+                    <span className="text-xs text-violet-500 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                      Read Report <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -161,7 +174,7 @@ export default function DashboardPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedPartner(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -176,14 +189,6 @@ export default function DashboardPage() {
                 title="Close"
               >
                 <X className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => handleDelete(selectedPartner.id)}
-                disabled={deleting}
-                className="absolute top-6 right-16 p-2 rounded-full bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                title="Delete Partner"
-              >
-                {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
               </button>
 
               <div className="flex flex-col md:flex-row items-start md:items-center gap-5 mb-8 pb-8 border-b border-black/10">
